@@ -4,6 +4,7 @@ import { useState } from 'react';
 const Index = () => {
   const [projectName, setProjectName] = useState('');
   const [projectDescription, setProjectDescription] = useState('');
+  const [projectLocation, setProjectLocation] = useState('');
   const [projectImage, setProjectImage] = useState('');
   const toast = useToast();
 
@@ -17,7 +18,7 @@ const Index = () => {
   };
 
   const handleSubmitProject = () => {
-    if (!projectName || !projectDescription || !projectImage) {
+    if (!projectName || !projectDescription || !projectLocation || !projectImage) {
       toast({
         title: 'Error',
         description: "Please fill all fields and upload an image.",
@@ -27,9 +28,10 @@ const Index = () => {
       });
       return;
     }
-    console.log('Project Submitted:', { projectName, projectDescription, projectImage });
+    console.log('Project Submitted:', { projectName, projectDescription, projectLocation, projectImage });
     setProjectName('');
     setProjectDescription('');
+    setProjectLocation('');
     setProjectImage('');
     toast({
       title: 'Success',
@@ -42,13 +44,15 @@ const Index = () => {
 
   return (
     <VStack spacing={4} align="center" justify="center" height="100vh">
-      <Text fontSize="2xl" mb="8">Project Upload Page</Text>
+      <Text fontSize="2xl" mb="8">Share Your Architectural Project</Text>
       <Box p={4} mt={8} borderWidth="1px" borderRadius="lg">
         <FormControl>
-          <FormLabel>Project Name</FormLabel>
+          <FormLabel>Project Title</FormLabel>
           <Input type="text" value={projectName} onChange={(e) => setProjectName(e.target.value)} />
-          <FormLabel mt={4}>Project Description</FormLabel>
+          <FormLabel mt={4}>Architectural Description</FormLabel>
           <Textarea value={projectDescription} onChange={(e) => setProjectDescription(e.target.value)} />
+          <FormLabel mt={4}>Project Location</FormLabel>
+          <Input type="text" placeholder="Enter location" value={projectLocation} onChange={(e) => setProjectLocation(e.target.value)} />
           <FormLabel mt={4}>Upload Image</FormLabel>
           <Input type="file" onChange={handleImageUpload} accept="image/*" />
           {projectImage && <Image src={projectImage} alt="Project Image" boxSize="300px" mt={4} />}
