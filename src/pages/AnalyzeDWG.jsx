@@ -32,14 +32,28 @@ const AnalyzeDWG = () => {
       });
       return;
     }
-    console.log('File Submitted for Analysis:', file);
-    toast({
-      title: 'Analysis in progress',
-      description: "Your file is being analyzed. Please wait.",
-      status: 'info',
-      duration: 3000,
-      isClosable: true,
-    });
+    // Simulate sending the file to a server for GPT-4 analysis
+    try {
+      console.log('File Submitted for GPT-4 Analysis:', file);
+      // Simulated response from server after analysis
+      setTimeout(() => {
+        toast({
+          title: 'Analysis Complete',
+          description: "Insights from your file have been generated.",
+          status: 'success',
+          duration: 3000,
+          isClosable: true,
+        });
+      }, 3000);
+    } catch (error) {
+      toast({
+        title: 'Analysis Failed',
+        description: "There was an error processing your file.",
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      });
+    }
     // Here you would typically handle the file upload to a server for analysis
   };
 
